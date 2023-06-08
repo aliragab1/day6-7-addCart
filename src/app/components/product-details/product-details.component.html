@@ -1,0 +1,35 @@
+<div class="card mb-3">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img
+        [src]="productDetails.thumbnail"
+        class="img-fluid rounded-start"
+        alt="..."
+      />
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{ productDetails.title }}</h5>
+        <p class="card-text">
+          {{ productDetails.description }}
+        </p>
+        <p class="card-text">
+          <small class="text-body-secondary">{{
+            productDetails.createdAt | date : "MMM d, y, h:mm:ss a"
+          }}</small>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <ul class="list-inline">
+    <li
+      *ngFor="let img of productDetails.images; let i = index"
+      class="list-inline-item"
+    >
+      <img [src]="productDetails.images[i]" alt="" />
+    </li>
+  </ul>
+</div>

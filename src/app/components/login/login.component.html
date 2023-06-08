@@ -1,0 +1,77 @@
+<div class="container">
+  <h1 class="text-center fs-2">Login Form (Template Driven)</h1>
+  <div class="container border my-5 p-5 shadow w-50">
+    <form #loginForm="ngForm" (ngSubmit)="submitProductForm(loginForm)">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input
+          type="email"
+          class="form-control"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+          name="email"
+          #userEmail="ngModel"
+          ngModel
+          required
+          pattern="[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+"
+        />
+        <div
+          id="emailHelp"
+          class="form-text text-danger"
+          *ngIf="userEmail.touched && userEmail.invalid"
+        >
+          <!-- <small *ngIf="userEmail.errors?.['required']"
+            >This field is required.</small
+          >
+          <small *ngIf="userEmail.errors?.['pattern']"
+            >Incompatible with email format.</small
+          > -->
+
+          <div *ngIf="userEmail.errors?.['required']">
+            <!-- Content to render if condition1 is true -->
+            This field is required.
+          </div>
+
+          <div *ngIf="userEmail.errors?.['pattern']">
+            <!-- Content to render if condition2 is true -->
+            Invalid email format.
+          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          aria-describedby="passwordHelp"
+          id="exampleInputPassword1"
+          name="password"
+          #userPassword="ngModel"
+          ngModel
+          required
+        />
+        <div
+          id="passwordHelp"
+          class="form-text text-danger"
+          *ngIf="userPassword.touched && userPassword.invalid"
+        >
+          <div *ngIf="userPassword.errors?.['required']">
+            This field is required.
+          </div>
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-primary w-100"
+        [disabled]="loginForm.invalid"
+      >
+        Login
+      </button>
+    </form>
+  </div>
+
+  <h5 class="text-center">
+    Don't have account? <a routerLink="/register">Register</a>
+  </h5>
+</div>

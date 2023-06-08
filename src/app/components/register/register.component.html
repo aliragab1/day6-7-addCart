@@ -1,0 +1,177 @@
+<div class="container">
+  <h1 class="text-center fs-2">Register Form (Reactive form)</h1>
+  <div class="container border my-5 p-5 shadow w-50">
+    <form [formGroup]="registerForm" (ngSubmit)="submitForm()">
+      <div class="mb-3">
+        <label for="fullName" class="form-label">Full name</label>
+        <input
+          type="text"
+          class="form-control"
+          aria-describedby="fullNameHelp"
+          id="fullName"
+          name="fullName"
+          formControlName="fullNameTs"
+        />
+        <div
+          id="fullNameHelp"
+          class="form-text text-danger"
+          *ngIf="
+            registerForm.controls['fullNameTs'].touched &&
+            registerForm.controls['fullNameTs'].invalid
+          "
+        >
+          <div *ngIf="registerForm.controls['fullNameTs'].errors?.['required']">
+            This field is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="userName" class="form-label">User name</label>
+        <input
+          type="text"
+          class="form-control"
+          aria-describedby="userNameHelp"
+          id="userName"
+          name="userName"
+          formControlName="userNameTs"
+        />
+        <div
+          id="userNameHelp"
+          class="form-text text-danger"
+          *ngIf="
+            registerForm.controls['userNameTs'].touched &&
+            registerForm.controls['userNameTs'].invalid
+          "
+        >
+          <div
+            *ngIf="registerForm.controls['userNameTs'].errors?.['required']; else elseBlock"
+          >
+            This field is required.
+          </div>
+
+          <ng-template #elseBlock>
+            <div
+              *ngIf="registerForm.controls['userNameTs'].errors?.['pattern']"
+            >
+              Invalid username format.
+            </div>
+          </ng-template>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="email" class="form-label">Email address</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          aria-describedby="emailHelp"
+          name="email"
+          formControlName="emailTs"
+        />
+        <div
+          id="emailHelp"
+          class="form-text text-danger"
+          *ngIf="
+            registerForm.controls['emailTs'].touched &&
+            registerForm.controls['emailTs'].invalid
+          "
+        >
+          <div
+            *ngIf="registerForm.controls['emailTs'].errors?.['required']; else elseBlock"
+          >
+            This field is required.
+          </div>
+
+          <ng-template #elseBlock>
+            <div *ngIf="registerForm.controls['emailTs'].errors?.['pattern']">
+              Invalid email format.
+            </div>
+          </ng-template>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Password:</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="passwordTs"
+          name="password"
+          class="form-control"
+          aria-describedby="passwordHelp"
+        />
+        <div
+          id="passwordHelp"
+          class="form-text text-danger"
+          *ngIf="
+            registerForm.controls['passwordTs'].touched &&
+            registerForm.controls['passwordTs'].invalid
+          "
+        >
+          <div
+            *ngIf="registerForm.controls['passwordTs'].errors?.['required']; else elseBlock"
+          >
+            This field is required.
+          </div>
+
+          <ng-template #elseBlock>
+            <div
+              *ngIf="registerForm.controls['passwordTs'].errors?.['pattern']"
+            >
+              Invalid email format.
+            </div>
+          </ng-template>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="confirmPassword" class="form-label"
+          >Confirm Password:</label
+        >
+        <input
+          type="password"
+          id="confirmPassword"
+          formControlName="confirmPasswordTs"
+          name="confirmPassword"
+          class="form-control"
+        />
+        <div
+          class="form-text text-danger"
+          *ngIf="
+            registerForm.hasError('passwordMatch') &&
+            (registerForm.dirty || registerForm.touched)
+          "
+        >
+          Passwords must match!
+        </div>
+        <div
+          class="form-text text-danger"
+          *ngIf="
+            registerForm.controls['confirmPasswordTs'].touched &&
+            registerForm.controls['confirmPasswordTs'].invalid
+          "
+        >
+          <div
+            *ngIf="registerForm.controls['confirmPasswordTs'].errors?.['required']"
+          >
+            This field is required.
+          </div>
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-primary w-100"
+        [disabled]="registerForm.invalid"
+      >
+        Register
+      </button>
+    </form>
+  </div>
+
+  <h5 class="text-center">
+    Already have account! <a routerLink="/login">Login</a>
+  </h5>
+</div>
